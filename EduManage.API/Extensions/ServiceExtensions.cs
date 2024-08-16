@@ -1,0 +1,36 @@
+﻿using EduManage.BusinessObjects.DTOs.Request;
+using EduManage.DAOs;
+using EduManage.Repositories.Implementation;
+using EduManage.Repositories.Interface;
+using EduManage.Services.Implementation;
+using EduManage.Services.Interface;
+
+
+namespace EduManage.API.Extensions
+{
+    public static class ServiceExtensions
+    {
+        public static IServiceCollection AddScopeService(this IServiceCollection serviceCollection)
+        {
+            #region DAOs
+            serviceCollection.AddScoped<CourseDao>();
+            serviceCollection.AddScoped<StudentDao>();
+            serviceCollection.AddScoped<EnrollmentDao>();
+            #endregion
+
+            #region Repositories
+            serviceCollection.AddScoped<ICourseRepository, CourseRepository>();
+            serviceCollection.AddScoped<IStudentRepository, StudentRepository>();
+            serviceCollection.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+            #endregion
+
+            #region Services
+            serviceCollection.AddScoped<ICourseService, CourseService>();
+            serviceCollection.AddScoped<IStudentService, StudentService>();
+            serviceCollection.AddScoped<IEnrollmentService, EnrollmentService>();
+            #endregion
+
+            return serviceCollection;
+        }
+    }
+}
