@@ -1,1 +1,0 @@
-[![Tesing with xUnit and Moq (CI applied)](https://github.com/ngckinhluan/EduManage/actions/workflows/script-ci.yml/badge.svg)](https://github.com/ngckinhluan/EduManage/actions/workflows/script-ci.yml)
