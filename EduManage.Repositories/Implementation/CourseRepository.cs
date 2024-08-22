@@ -12,29 +12,11 @@ namespace EduManage.Repositories.Implementation
     public class CourseRepository(CourseDao courseDao) : ICourseRepository
     {
         
-        public List<Course> GetAll()
-        {
-            return courseDao.GetCourses();
-        }
-
-        public Course GetById(int id)
-        {
-            return courseDao.GetCourseById(id);
-        }
-
-        public void Add(Course entity)
-        {
-            courseDao.AddCourse(entity);
-        }
-
-        public void Update(int id, Course entity)
-        {
-            courseDao.UpdateCourse(id, entity);
-        }
+        public List<Course> GetAll() => courseDao.GetCourses();
+        public Course GetById(int id) => courseDao.GetCourseById(id);
+        public void Add(Course entity) =>  courseDao.AddCourse(entity);
+        public void Update(int id, Course entity) => courseDao.UpdateCourse(id, entity);
+        public void Delete(int id) => courseDao.DeleteCourse(id);
         
-        public void Delete(int id)
-        {
-            courseDao.DeleteCourse(id);
-        }
     }
 }

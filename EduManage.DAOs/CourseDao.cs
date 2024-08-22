@@ -15,7 +15,7 @@ namespace EduManage.DAOs
             return context.Courses.ToList();
         }
 
-        public Course GetCourseById(int courseId)
+        public Course? GetCourseById(int courseId)
         {
             return context.Courses.Find(courseId);
         }
@@ -29,6 +29,10 @@ namespace EduManage.DAOs
         public void DeleteCourse(int courseId)
         {
             var course = context.Courses.Find(courseId);
+            if (course == null)
+            {
+                throw new Exception("Course not found");
+            }
             context.Courses.Remove(course);
             context.SaveChanges();
         }
@@ -46,6 +50,11 @@ namespace EduManage.DAOs
             existingCourse.Description = course.Description;
             context.Courses.Update(course);
             context.SaveChanges();
+        }
+        
+        public List<Course> Find(Func<Course, bool> predicate)
+        {
+            return context.Courses.Where(predicate).ToList();
         }
 
 

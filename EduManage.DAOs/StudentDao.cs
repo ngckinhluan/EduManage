@@ -25,7 +25,7 @@ namespace EduManage.DAOs
 
         public Student GetStudentById(int studentId)
         {
-            return context.Students.Find(studentId);
+            return context.Students.Find(studentId) ?? throw new InvalidOperationException();
         }
 
         public void AddStudent(Student student)
@@ -41,6 +41,7 @@ namespace EduManage.DAOs
             {
                 throw new Exception("Student not found");
             }
+
             existingStudent.FirstName = student.FirstName;
             existingStudent.LastName = student.LastName;
             existingStudent.Email = student.Email;
@@ -63,5 +64,9 @@ namespace EduManage.DAOs
             return context.Students.FirstOrDefault(s => s.Email == email);
         }
 
+        public List<Student> Find(Func<Student, bool> predicate)
+        {
+            return context.Students.Where(predicate).ToList();
+        }
     }
 }

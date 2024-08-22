@@ -13,14 +13,15 @@ namespace EduManage.API.Extensions
             CreateMap<Course, CourseRequestDto>().ReverseMap();
             CreateMap<Student, StudentRequestDto>().ReverseMap();
             CreateMap<Enrollment, EnrollmentRequestDto>().ReverseMap();
+            CreateMap<Lecturer, LecturerRequestDto>().ReverseMap();
+            CreateMap<LecturerCourse, LecturerCourseRequestDto>().ReverseMap();
 
             // ResponseDto Mapping
             CreateMap<Course, CourseResponseDto>().ReverseMap();
             CreateMap<Student, StudentResponseDto>().ReverseMap();
-            CreateMap<Enrollment, EnrollmentResponseDto>();
-           
-
-
+            CreateMap<Enrollment, EnrollmentResponseDto>().ReverseMap();
+            CreateMap<Lecturer, LecturerResponseDto>().ReverseMap();
+            CreateMap<LecturerCourse, LecturerCourseResponseDto>().ReverseMap();
         }
     }
 }

@@ -20,5 +20,6 @@ namespace EduManage.BusinessObjects.Entities
 
         // Navigation property
         public virtual ICollection<Enrollment>? Enrollments { get; set; }
+        public virtual ICollection<LecturerCourse>? LecturerCourses { get; set; }
     }
 }

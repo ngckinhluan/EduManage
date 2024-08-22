@@ -21,6 +21,9 @@ namespace EduManage.BusinessObjects.Entities
         public string? Phone { get; set; }
         public string? Address { get; set; }
 
+        [MaxLength(255)]
+        public string? Password { get; set; }
+
         // Navigation property
         public virtual ICollection<Enrollment>? Enrollments { get; set; }
     }

@@ -13,14 +13,12 @@ namespace EduManage.BusinessObjects.Context
     {
         public ApplicationDbContext()
         {
-            
         }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
-        
+
         public string? GetConnectionString()
         {
             IConfiguration configuration = new ConfigurationBuilder()
@@ -34,14 +32,19 @@ namespace EduManage.BusinessObjects.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=edumanage;Username=postgres;Password=12345");
+                optionsBuilder.UseNpgsql(
+                    "Host=localhost;Port=5432;Database=edumanage;Username=postgres;Password=12345");
             }
         }
 
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
-        
+
+        public virtual DbSet<Lecturer> Lecturers { get; set; }
+
+        public virtual DbSet<LecturerCourse> LecturerCourses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Primary keys
@@ -50,6 +53,10 @@ namespace EduManage.BusinessObjects.Context
             modelBuilder.Entity<Course>().HasKey(c => c.CourseId);
             modelBuilder.Entity<Course>().Property(c => c.CourseId).ValueGeneratedOnAdd();
             modelBuilder.Entity<Enrollment>().HasKey(e => new { e.StudentId, e.CourseId });
+            modelBuilder.Entity<Lecturer>().HasKey(l => l.LecturerId);
+            modelBuilder.Entity<Lecturer>().Property(l => l.LecturerId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<LecturerCourse>().HasKey(lc => new { lc.LecturerId, lc.CourseId });
+
 
             // Relationships
             modelBuilder.Entity<Enrollment>()
@@ -61,6 +68,16 @@ namespace EduManage.BusinessObjects.Context
                 .HasOne<Course>(e => e.Course)
                 .WithMany(c => c.Enrollments)
                 .HasForeignKey(e => e.CourseId);
+
+            modelBuilder.Entity<LecturerCourse>()
+                .HasOne(lc => lc.Lecturer)
+                .WithMany(lc => lc.LecturerCourses)
+                .HasForeignKey(lc => lc.LecturerId);
+
+            modelBuilder.Entity<LecturerCourse>()
+                .HasOne(lc => lc.Course)
+                .WithMany(c => c.LecturerCourses)
+                .HasForeignKey(lc => lc.CourseId);
         }
     }
 }
