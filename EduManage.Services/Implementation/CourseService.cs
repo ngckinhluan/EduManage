@@ -13,16 +13,8 @@ namespace EduManage.Services.Implementation
 {
     public class CourseService(ICourseRepository repository, IMapper mapper) : ICourseService
     {
-
-        public List<Course> GetAllCourses()
-        {
-            return repository.GetAll();
-        }
-
-        public Course GetCourseById(int id)
-        {
-            return repository.GetById(id);
-        }
+        public List<Course> GetAllCourses() => repository.GetAll();
+        public Course GetCourseById(int id) => repository.GetById(id);
 
         public void AddCourse(CourseRequestDto course)
         {
@@ -30,14 +22,8 @@ namespace EduManage.Services.Implementation
             repository.Add(entity);
         }
 
-        public void UpdateCourse(int id, CourseRequestDto course)
-        {
-            repository.Update(id, mapper.Map<Course>(course));
-        }
-
-        public void DeleteCourse(int id)
-        {
-            repository.Delete(id);
-        }
+        public void UpdateCourse(int id, CourseRequestDto course) => repository.Update(id, mapper.Map<Course>(course));
+        public void DeleteCourse(int id) => repository.Delete(id);
+        public List<Course> Find(Func<Course, bool> predicate) => repository.Find(predicate);
     }
 }

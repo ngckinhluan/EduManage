@@ -15,6 +15,6 @@ namespace EduManage.Services.Interface
         void Add(StudentRequestDto student);
         void Update(int id, StudentRequestDto student);
         void Delete(int id);
-
+        List<Student> Find(Func<Student, bool> predicate);
     }
 }

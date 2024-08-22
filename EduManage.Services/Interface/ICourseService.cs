@@ -15,5 +15,6 @@ namespace EduManage.Services.Interface
         void AddCourse(CourseRequestDto course);
         void UpdateCourse(int id, CourseRequestDto course);
         void DeleteCourse(int id);
+        List<Course> Find(Func<Course, bool> predicate);
     }
 }
