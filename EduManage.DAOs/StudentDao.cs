@@ -25,7 +25,7 @@ namespace EduManage.DAOs
 
         public Student GetStudentById(int studentId)
         {
-            return context.Students.Find(studentId) ?? throw new InvalidOperationException();
+            return context.Students.Find(studentId);
         }
 
         public void AddStudent(Student student)

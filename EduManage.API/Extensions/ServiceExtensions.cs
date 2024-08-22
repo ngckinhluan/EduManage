@@ -16,12 +16,16 @@ namespace EduManage.API.Extensions
             serviceCollection.AddScoped<CourseDao>();
             serviceCollection.AddScoped<StudentDao>();
             serviceCollection.AddScoped<EnrollmentDao>();
+            serviceCollection.AddScoped<LecturerDao>();
+            serviceCollection.AddScoped<LecturerCourseDao>();
             #endregion
 
             #region Repositories
             serviceCollection.AddScoped<ICourseRepository, CourseRepository>();
             serviceCollection.AddScoped<IStudentRepository, StudentRepository>();
             serviceCollection.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+            serviceCollection.AddScoped<ILecturerRepository, LecturerRepository>();
+            serviceCollection.AddScoped<ILecturerCourseRepository, LecturerCourseRepository>();
             #endregion
 
             #region Services

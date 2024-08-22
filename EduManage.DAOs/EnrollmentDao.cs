@@ -56,5 +56,10 @@ namespace EduManage.DAOs
             context.Enrollments.Remove(enrollment);
             context.SaveChanges();
         }
+        
+        public List<Enrollment> Find(Func<Enrollment, bool> predicate)
+        {
+            return context.Enrollments.Where(predicate).ToList();
+        }
     }
 }
