@@ -13,5 +13,6 @@ namespace EduManage.Repositories.Interface.GenericRepository
         void Add(T entity);
         void Update(int id, T entity);
         void Delete(int id);
+        List<T> Find(Func<T, bool> predicate);
     }
 }

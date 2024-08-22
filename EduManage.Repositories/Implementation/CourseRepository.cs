@@ -17,6 +17,7 @@ namespace EduManage.Repositories.Implementation
         public void Add(Course entity) =>  courseDao.AddCourse(entity);
         public void Update(int id, Course entity) => courseDao.UpdateCourse(id, entity);
         public void Delete(int id) => courseDao.DeleteCourse(id);
-        
+        public List<Course> Find(Func<Course, bool> predicate) => courseDao.Find(predicate);
+
     }
 }

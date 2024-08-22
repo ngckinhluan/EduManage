@@ -29,4 +29,9 @@ public class LecturerCourseRepository : ILecturerRepository
     {
         throw new NotImplementedException();
     }
+
+    public List<Lecturer> Find(Func<Lecturer, bool> predicate)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -36,6 +36,11 @@ namespace EduManage.Repositories.Implementation
             studentDao.DeleteStudent(id);
         }
 
+        public List<Student> Find(Func<Student, bool> predicate)
+        {
+            return studentDao.Find(predicate);
+        }
+
         public Student GetStudentByEmail(string email)
         {
             return studentDao.GetStudentByEmail(email);
