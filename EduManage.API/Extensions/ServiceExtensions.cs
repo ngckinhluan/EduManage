@@ -2,6 +2,7 @@
 using EduManage.DAOs;
 using EduManage.Repositories.Implementation;
 using EduManage.Repositories.Interface;
+using EduManage.Services.Helpers;
 using EduManage.Services.Implementation;
 using EduManage.Services.Interface;
 
@@ -34,6 +35,8 @@ namespace EduManage.API.Extensions
             serviceCollection.AddScoped<IEnrollmentService, EnrollmentService>();
             serviceCollection.AddScoped<ILecturerService, LecturerService>();
             serviceCollection.AddScoped<ILecturerCourseService, LecturerCourseService>();
+            serviceCollection.AddScoped<IAuthService, AuthService>();
+            serviceCollection.AddScoped<GenerateJWT>();
             #endregion
 
             return serviceCollection;

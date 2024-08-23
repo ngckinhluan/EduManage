@@ -4,7 +4,7 @@ namespace EduManage.BusinessObjects.Entities;
 
 public class Lecturer
 {
-    public required int LecturerId { get; set; }
+    public int LecturerId { get; set; }
     [StringLength(255)]
     public required string UserName { get; set; }
     [EmailAddress]
@@ -13,9 +13,9 @@ public class Lecturer
     [StringLength(255)]
     public required string Password { get; set; }
     [StringLength(255)]
-    public required string FirstName { get; set; }
+    public string? FirstName { get; set; }
     [StringLength(255)]
-    public required string LastName { get; set; }
+    public string? LastName { get; set; }
     public string? Phone { get; set; }
     public string? Address { get; set; }
     
