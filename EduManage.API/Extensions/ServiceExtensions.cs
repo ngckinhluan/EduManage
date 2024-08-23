@@ -32,6 +32,8 @@ namespace EduManage.API.Extensions
             serviceCollection.AddScoped<ICourseService, CourseService>();
             serviceCollection.AddScoped<IStudentService, StudentService>();
             serviceCollection.AddScoped<IEnrollmentService, EnrollmentService>();
+            serviceCollection.AddScoped<ILecturerService, LecturerService>();
+            serviceCollection.AddScoped<ILecturerCourseService, LecturerCourseService>();
             #endregion
 
             return serviceCollection;

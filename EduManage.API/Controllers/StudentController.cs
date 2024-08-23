@@ -36,7 +36,7 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "Student added successfully!" });
         }
 
-        [HttpPost]
+        [HttpPost("find")]
         public IActionResult FindStudent([FromBody] Func<Student, bool> predicate)
         {
             var result = service.Find(predicate);

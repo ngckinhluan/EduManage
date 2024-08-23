@@ -30,7 +30,7 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "LecturerCourse added successfully!" });
         }
 
-        [HttpPost]
+        [HttpPost("find")]
         public IActionResult FindLecturerCourse([FromBody] Func<LecturerCourse, bool> predicate)
         {
             var result = lecturerCourseService.Find(predicate);
