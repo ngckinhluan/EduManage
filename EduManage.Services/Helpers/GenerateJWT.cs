@@ -13,9 +13,9 @@ namespace EduManage.Services.Helpers
             var claims = new[]
             {
                 new Claim("Id", lecturerId.ToString()),
-                new Claim(ClaimTypes.Email, email),
+                new Claim("Email", email),
                 // new Claim(ClaimTypes.Role, role),
-                new Claim(ClaimTypes.Name, username)
+                new Claim("Username", username)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
