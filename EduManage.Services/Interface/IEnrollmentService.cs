@@ -7,7 +7,7 @@ namespace EduManage.Services.Interface
     public interface IEnrollmentService
     {
         List<Enrollment> GetAllEnrollments();
-        // List<Enrollment> Find(Func<Enrollment, bool> predicate);
+        List<Enrollment> Find(Func<Enrollment, bool> predicate);
         Enrollment GetEnrollmentById(int studentId, int courseId);
         void AddEnrollment(EnrollmentRequestDto enrollment);
         void UpdateEnrollment(int studentId, int courseId, EnrollmentRequestDto enrollment);

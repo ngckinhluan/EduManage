@@ -10,6 +10,6 @@ public interface ILecturerCourseRepository
     void Add(LecturerCourse entity);
     void Update(int lecturerId, int courseId, LecturerCourse entity);
     void Delete(int lecturerId, int courseId);
-    void Find (Func<LecturerCourse, bool> predicate);
+    List<LecturerCourse> Find (Func<LecturerCourse, bool> predicate);
     
 }

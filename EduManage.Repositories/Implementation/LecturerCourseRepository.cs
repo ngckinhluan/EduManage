@@ -11,6 +11,6 @@ public class LecturerCourseRepository(LecturerCourseDao lecturerCourseDao) : ILe
     public void Add(LecturerCourse entity) => lecturerCourseDao.AddLecturerCourse(entity);
     public void Update(int lecturerId, int courseId, LecturerCourse entity) => lecturerCourseDao.UpdateLecturerCourse(lecturerId, courseId, entity);
     public void Delete(int lecturerId, int courseId) => lecturerCourseDao.DeleteLecturerCourse(lecturerId, courseId);
-    public void Find(Func<LecturerCourse, bool> predicate) => lecturerCourseDao.Find(predicate);
+    public List<LecturerCourse> Find(Func<LecturerCourse, bool> predicate) => lecturerCourseDao.Find(predicate);
 
 }

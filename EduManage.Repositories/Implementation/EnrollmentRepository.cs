@@ -16,6 +16,6 @@ namespace EduManage.Repositories.Implementation
         public void Add(Enrollment entity) => enrollmentDao.AddEnrollment(entity);
         public void Update(int studentId, int courseId, Enrollment entity) => enrollmentDao.UpdateEnrollment(studentId, courseId, entity);
         public void Delete(int studentId, int courseId) => enrollmentDao.DeleteEnrollment(studentId, courseId);
-        public void Find(Func<Enrollment, bool> predicate) => enrollmentDao.Find(predicate);
+        public List<Enrollment> Find(Func<Enrollment, bool> predicate) => enrollmentDao.Find(predicate);
     }
 }

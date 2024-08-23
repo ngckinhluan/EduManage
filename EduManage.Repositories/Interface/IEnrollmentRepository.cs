@@ -15,6 +15,6 @@ namespace EduManage.Repositories.Interface
         void Add(Enrollment entity);
         void Update(int studentId, int courseId, Enrollment entity);
         void Delete(int studentId, int courseId);
-        void Find (Func<Enrollment, bool> predicate);
+        List<Enrollment> Find (Func<Enrollment, bool> predicate);
     }
 }
