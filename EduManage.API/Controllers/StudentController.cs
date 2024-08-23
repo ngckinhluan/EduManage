@@ -1,17 +1,18 @@
 ﻿using AutoMapper;
 using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.DTOs.Response;
+using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduManage.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/student")]
     [ApiController]
     public class StudentController(IStudentService service, IMapper mapper) : ControllerBase
     {
-        [HttpGet("GetStudents")]
+        [HttpGet()]
         public IActionResult GetStudents()
         {
             var result = service.GetAll();
@@ -20,7 +21,7 @@ namespace EduManage.API.Controllers
         }
 
 
-        [HttpGet("GetStudentById/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetStudent(int id)
         {
             var result = service.GetById(id);
@@ -32,7 +33,7 @@ namespace EduManage.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("AddStudent")]
+        [HttpPost]
         public IActionResult AddStudent([FromBody] StudentRequestDto student)
         {
             if (!ModelState.IsValid)
@@ -56,6 +57,17 @@ namespace EduManage.API.Controllers
                     error = ex.Message
                 });
             }
+        }
+        
+        [HttpPost]
+        public IActionResult FindStudent([FromBody] Func<Student, bool> predicate)
+        {
+            var result = service.Find(predicate);
+            if (result == null)
+            {
+                return NotFound(new { message = "Student not found! " });
+            }
+            return Ok(result);
         }
 
 
@@ -86,7 +98,7 @@ namespace EduManage.API.Controllers
         //    }
         //}
 
-        [HttpPut("UpdateStudent/{id}")]
+        [HttpPut("{id}")]
         public IActionResult UpdateStudent(int id, [FromBody] StudentRequestDto student)
         {
             if (!ModelState.IsValid)

@@ -1,16 +1,17 @@
 ﻿using AutoMapper;
 using EduManage.BusinessObjects.DTOs.Request;
+using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduManage.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/enrollment")]
     [ApiController]
     public class EnrollmentController(IEnrollmentService service, IMapper mapper) : ControllerBase
     {
-        [HttpGet("GetEnrollments")]
+        [HttpGet]
         public IActionResult GetEnrollments()
         {
             var result = service.GetAllEnrollments();
@@ -21,7 +22,7 @@ namespace EduManage.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetEnrollmentById/{studentId}/{courseId}")]
+        [HttpGet("{studentId}/{courseId}")]
         public IActionResult GetEnrollment(int studentId, int courseId)
         {
             var result = service.GetEnrollmentById(studentId, courseId);
@@ -32,11 +33,22 @@ namespace EduManage.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("AddEnrollment")]
+        [HttpPost]
         public IActionResult AddEnrollment(EnrollmentRequestDto enrollment)
         {
             service.AddEnrollment(enrollment);
             return Ok(new { message = "Enrollment added successfully!" });
+        }
+        
+        [HttpPost]
+        public IActionResult FindEnrollment([FromBody] Func<Enrollment, bool> predicate)
+        {
+            var result = service.Find(predicate);
+            if (result == null)
+            {
+                return NotFound(new { message = "Enrollment not found! " });
+            }
+            return Ok(result);
         }
 
         //[HttpPut("UpdateEnrollment")]
@@ -46,14 +58,14 @@ namespace EduManage.API.Controllers
         //    return Ok(new { message = "Enrollment updated successfully!" });
         //}
 
-        [HttpPut("UpdateEnrollment/{studentId}/{courseId}")]
+        [HttpPut("{studentId}/{courseId}")]
         public IActionResult UpdateEnrollment(int studentId, int courseId, EnrollmentRequestDto enrollment)
         {
             service.UpdateEnrollment(studentId, courseId, enrollment);
             return Ok(new { message = "Enrollment updated successfully!" });
         }
 
-        [HttpDelete("DeleteEnrollment/{studentId}/{courseId}")]
+        [HttpDelete("{studentId}/{courseId}")]
         public IActionResult DeleteEnrollment(int studentId, int courseId)
         {
             service.DeleteEnrollment(studentId, courseId);
