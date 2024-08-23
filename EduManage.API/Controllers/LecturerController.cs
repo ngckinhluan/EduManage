@@ -37,12 +37,12 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "Lecturer added successfully!" });
         }
 
-        [HttpPost("find")]
-        public IActionResult FindLecturer([FromBody] Func<Lecturer, bool> predicate)
-        {
-            var result = service.Find(predicate);
-            return Ok(result);
-        }
+        // [HttpPost("find")]
+        // public IActionResult FindLecturer([FromBody] Func<Lecturer, bool> predicate)
+        // {
+        //     var result = service.Find(predicate);
+        //     return Ok(result);
+        // }
 
         [HttpPut("{id}")]
         public IActionResult UpdateLecturer(int id, [FromBody] LecturerRequestDto lecturer)

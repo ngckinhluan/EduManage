@@ -32,12 +32,12 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "Enrollment added successfully!" });
         }
         
-        [HttpPost("find")]
-        public IActionResult FindEnrollment([FromBody] Func<Enrollment, bool> predicate)
-        {
-            var result = service.Find(predicate);
-            return Ok(result);
-        }
+        // [HttpPost("find")]
+        // public IActionResult FindEnrollment([FromBody] Func<Enrollment, bool> predicate)
+        // {
+        //     var result = service.Find(predicate);
+        //     return Ok(result);
+        // }
 
         //[HttpPut("UpdateEnrollment")]
         //public IActionResult UpdateEnrollment(EnrollmentRequestDto enrollment)

@@ -36,19 +36,28 @@ public class LecturerCourseDao(ApplicationDbContext context)
         context.SaveChanges();
     }
     
-    public void UpdateLecturerCourse(int lecturerId, int courseId, LecturerCourse lecturerCourse)
+    public void UpdateLecturerCourse(int lecturerId, int courseId, LecturerCourse updatedLecturerCourse)
     {
+        // Retrieve the existing entity from the database
         var existingLecturerCourse = context.LecturerCourses
             .FirstOrDefault(lc => lc.LecturerId == lecturerId && lc.CourseId == courseId);
+    
         if (existingLecturerCourse == null)
         {
             throw new Exception("LecturerCourse not found");
         }
-        existingLecturerCourse.LecturerId = lecturerCourse.LecturerId;
-        existingLecturerCourse.CourseId = lecturerCourse.CourseId;
-        context.LecturerCourses.Update(lecturerCourse);
+    
+        // Update the fields of the existing entity
+        existingLecturerCourse.AssignedDate = updatedLecturerCourse.AssignedDate;
+        existingLecturerCourse.Role = updatedLecturerCourse.Role;
+    
+        // Mark the entity as modified
+        context.Entry(existingLecturerCourse).State = EntityState.Modified;
+    
+        // Save changes to the database
         context.SaveChanges();
     }
+
     
     public List<LecturerCourse> Find(Func<LecturerCourse, bool> predicate)
     {

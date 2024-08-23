@@ -35,12 +35,12 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "Course added successfully!" });
         }
         
-        [HttpPost("find")]
-        public IActionResult FindCourse([FromBody] Func<Course, bool> predicate)
-        {
-            var result = service.Find(predicate);
-            return Ok(result);
-        }
+        // [HttpPost("find")]
+        // public IActionResult FindCourse([FromBody] Func<Course, bool> predicate)
+        // {
+        //     var result = service.Find(predicate);
+        //     return Ok(result);
+        // }
 
         [HttpPut("{id}")]
         public IActionResult UpdateCourse(int id, [FromBody] CourseRequestDto course)

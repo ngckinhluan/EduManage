@@ -12,14 +12,13 @@ namespace EduManage.API.Controllers
     [ApiController]
     public class StudentController(IStudentService service, IMapper mapper) : ControllerBase
     {
-        [HttpGet()]
+        [HttpGet]
         public IActionResult GetStudents()
         {
             var result = service.GetAll();
             var response = mapper.Map<List<StudentResponseDto>>(result);
             return Ok(response);
         }
-
 
         [HttpGet("{id}")]
         public IActionResult GetStudent(int id)
@@ -36,12 +35,12 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "Student added successfully!" });
         }
 
-        [HttpPost("find")]
-        public IActionResult FindStudent([FromBody] Func<Student, bool> predicate)
-        {
-            var result = service.Find(predicate);
-            return Ok(result);
-        }
+        // [HttpPost("find")]
+        // public IActionResult FindStudent([FromBody] Func<Student, bool> predicate)
+        // {
+        //     var result = service.Find(predicate);
+        //     return Ok(result);
+        // }
 
 
         //[HttpPut("UpdateStudent")]
@@ -75,6 +74,14 @@ namespace EduManage.API.Controllers
         { 
             service.Update(id, student);
             return Ok(new { message = "Student updated successfully!" });
+        }
+        
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            var student = service.GetById(id);
+            service.Delete(id);
+            return Ok(new { message = "Student deleted successfully!" });
         }
     }
 }

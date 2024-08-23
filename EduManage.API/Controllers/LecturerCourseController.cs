@@ -5,7 +5,7 @@ using EduManage.Services.Interface;
 
 namespace EduManage.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/lecturerCourse")]
     [ApiController]
     public class LecturerCourseController(ILecturerCourseService lecturerCourseService) : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace EduManage.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{lecturerId}/{courseId}")]
         public IActionResult GetLecturerCourse(int lecturerId, int courseId)
         {
             var result = lecturerCourseService.GetLecturerCourseById(lecturerId, courseId);
@@ -30,18 +30,17 @@ namespace EduManage.API.Controllers
             return Ok(new { message = "LecturerCourse added successfully!" });
         }
 
-        [HttpPost("find")]
-        public IActionResult FindLecturerCourse([FromBody] Func<LecturerCourse, bool> predicate)
-        {
-            var result = lecturerCourseService.Find(predicate);
-            return Ok(result);
-        }
+        // [HttpPost("find")]
+        // public IActionResult FindLecturerCourse([FromBody] Func<LecturerCourse, bool> predicate)
+        // {
+        //     var result = lecturerCourseService.Find(predicate);
+        //     return Ok(result);
+        // }
 
-        [HttpPut("{id}")]
+        [HttpPut("{lecturerId}/{courseId}")]
         public IActionResult UpdateLecturerCourse(int lecturerId, int courseId,
             [FromBody] LecturerCourseRequestDto lecturerCourse)
         {
-            var existingLecturerCourse = lecturerCourseService.GetLecturerCourseById(lecturerId, courseId);
             lecturerCourseService.UpdateLecturerCourse(lecturerId, courseId, lecturerCourse);
             return Ok(new { message = "LecturerCourse updated successfully!" });
         }
