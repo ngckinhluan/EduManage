@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Net;
+using System.Net.Mail;
 using EduManage.BusinessObjects.Context;
 using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.DTOs.Response;
@@ -38,6 +39,10 @@ public class AuthService(GenerateJWT generateJwt, ApplicationDbContext context) 
             Email = registerRequestDto.Email,
             Password = registerRequestDto.Password,
             UserName = registerRequestDto.Username,
+            FirstName = registerRequestDto.FirstName,
+            LastName = registerRequestDto.LastName,
+            Phone = registerRequestDto.Phone,
+            Address = registerRequestDto.Address
         };
         context.Lecturers.Add(newUser);
         context.SaveChanges();
@@ -56,12 +61,29 @@ public class AuthService(GenerateJWT generateJwt, ApplicationDbContext context) 
     
     private void SendEmail(string email, string otp)
     {
-        MailMessage mail = new MailMessage("noreply@yourapp.com", email);
-        mail.Subject = "Reset Your Password";
-        mail.Body = $"Your OTP code is: {otp}";
-        using (SmtpClient client = new SmtpClient("luan.tran2907@gmail.com"))
+        var mail = new MailMessage
         {
-            client.Send(mail);
+            From = new MailAddress("swppass6@gmail.com"), 
+            Subject = "Reset Your Password",
+            Body = $"Your OTP code is: {otp}",
+            IsBodyHtml = true
+        };
+        mail.To.Add(email);
+        using (var client = new SmtpClient("smtp.gmail.com", 587)) 
+        {
+            client.EnableSsl = true; 
+            client.UseDefaultCredentials = true;
+            client.Credentials = new NetworkCredential("swppass6@gmail.com", "jason.tran.1234"); 
+            try
+            {
+                client.Send(mail);
+            }
+            catch (SmtpException ex)
+            {
+                throw new Exception("Error sending email: " + ex.Message);
+            }
         }
     }
+
+
 }
