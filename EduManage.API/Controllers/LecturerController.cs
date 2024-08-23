@@ -20,10 +20,6 @@ namespace EduManage.API.Controllers
         public IActionResult GetLecturers()
         {
             var result = service.GetAll();
-            if (result == null)
-            {
-                return NotFound(new { message = "Lecturer not found! " });
-            }
             return Ok(result);
         }
         
@@ -31,11 +27,6 @@ namespace EduManage.API.Controllers
         public IActionResult GetLecturer(int id)
         {
             var result = service.GetById(id);
-            if (result == null)
-            {
-                return NotFound(new { message = $"Lecturer with id: {id} is not found!" });
-            }
-
             return Ok(result);
         }
 
@@ -50,11 +41,6 @@ namespace EduManage.API.Controllers
         public IActionResult FindLecturer([FromBody] Func<Lecturer, bool> predicate)
         {
             var result = service.Find(predicate);
-            if (result == null)
-            {
-                return NotFound(new { message = "Lecturer not found! " });
-            }
-
             return Ok(result);
         }
 
@@ -62,11 +48,6 @@ namespace EduManage.API.Controllers
         public IActionResult UpdateLecturer(int id, [FromBody] LecturerRequestDto lecturer)
         {
             var existingLecturer = service.GetById(id);
-            if (existingLecturer == null)
-            {
-                return NotFound(new { message = $"Lecturer with id: {id} not found!" });
-            }
-
             service.Update(id, lecturer);
             return Ok(new { message = "Lecturer updated successfully!" });
         }
@@ -75,10 +56,6 @@ namespace EduManage.API.Controllers
         public IActionResult DeleteLecturer(int id)
         {
             var lecturer = service.GetById(id);
-            if (lecturer == null)
-            {
-                return NotFound(new { message = $"Lecturer with id: {id} not found!" });
-            }
             service.Delete(id);
             return Ok(new { message = "Lecturer deleted successfully!" });
         }

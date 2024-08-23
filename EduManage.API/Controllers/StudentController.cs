@@ -25,10 +25,6 @@ namespace EduManage.API.Controllers
         public IActionResult GetStudent(int id)
         {
             var result = service.GetById(id);
-            if (result == null)
-            {
-                return NotFound(new { message = $"Student with id: {id} is not found!" });
-            }
             var response = mapper.Map<StudentResponseDto>(result);
             return Ok(response);
         }
@@ -36,40 +32,16 @@ namespace EduManage.API.Controllers
         [HttpPost]
         public IActionResult AddStudent([FromBody] StudentRequestDto student)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new
-                {
-                    message = "Invalid model state!",
-                    errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
-                });
-            }
-            try
-            {
-                service.Add(student);
-                return Ok(new { message = "Student added successfully!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new
-                {
-                    message = "An error occurred while adding the student!",
-                    error = ex.Message
-                });
-            }
+            service.Add(student);
+            return Ok(new { message = "Student added successfully!" });
         }
-        
+
         [HttpPost]
         public IActionResult FindStudent([FromBody] Func<Student, bool> predicate)
         {
             var result = service.Find(predicate);
-            if (result == null)
-            {
-                return NotFound(new { message = "Student not found! " });
-            }
             return Ok(result);
         }
-
 
 
         //[HttpPut("UpdateStudent")]
@@ -100,30 +72,9 @@ namespace EduManage.API.Controllers
 
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(int id, [FromBody] StudentRequestDto student)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new
-                {
-                    message = "Invalid model state!",
-                    errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
-                });
-            }
-            var existingStudent = service.GetById(id);
-            if (existingStudent == null)
-            {
-                return NotFound(new { message = $"Student with id: {id} not found!" });
-            }
-
-            try
-            {
-                service.Update(id, student);
-                return Ok(new { message = "Student updated successfully!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "An error occurred while updating the student!", error = ex.Message });
-            }
+        { 
+            service.Update(id, student);
+            return Ok(new { message = "Student updated successfully!" });
         }
     }
 }

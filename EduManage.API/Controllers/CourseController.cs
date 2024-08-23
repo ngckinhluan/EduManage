@@ -24,10 +24,6 @@ namespace EduManage.API.Controllers
         public IActionResult GetCourse(int id)
         {
             var result = service.GetCourseById(id);
-            if (result == null)
-            {
-                return NotFound(new { message = $"Course with id: {id} is not found! " });
-            }
             var response = mapper.Map<CourseResponseDto>(result);
             return Ok(response);
         }
@@ -43,10 +39,6 @@ namespace EduManage.API.Controllers
         public IActionResult FindCourse([FromBody] Func<Course, bool> predicate)
         {
             var result = service.Find(predicate);
-            if (result == null)
-            {
-                return NotFound(new { message = "Course not found! " });
-            }
             return Ok(result);
         }
 
@@ -54,10 +46,6 @@ namespace EduManage.API.Controllers
         public IActionResult UpdateCourse(int id, [FromBody] CourseRequestDto course)
         {
             var existingCourse = service.GetCourseById(id);
-            if (existingCourse == null)
-            {
-                return NotFound(new { message = $"Course with id: {id} not found!" });
-            }
             service.UpdateCourse(id, course);
             return NoContent();
         }
@@ -67,10 +55,6 @@ namespace EduManage.API.Controllers
         public IActionResult DeleteCourse(int id)
         {
             var course = service.GetCourseById(id);
-            if (course == null)
-            {
-                return NotFound(new { message = $"Student with id: {id} not found!" });
-            }
             service.DeleteCourse(id);
             return NoContent();
         }

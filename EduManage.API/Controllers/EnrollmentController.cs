@@ -15,10 +15,6 @@ namespace EduManage.API.Controllers
         public IActionResult GetEnrollments()
         {
             var result = service.GetAllEnrollments();
-            if (result == null)
-            {
-                return NotFound(new { message = "Enrollment not found! " });
-            }
             return Ok(result);
         }
 
@@ -26,10 +22,6 @@ namespace EduManage.API.Controllers
         public IActionResult GetEnrollment(int studentId, int courseId)
         {
             var result = service.GetEnrollmentById(studentId, courseId);
-            if (result == null)
-            {
-                return NotFound(new { message = $"Enrollment with studentId: {studentId} and courseId: {courseId} is not found!" });
-            }
             return Ok(result);
         }
 
@@ -44,10 +36,6 @@ namespace EduManage.API.Controllers
         public IActionResult FindEnrollment([FromBody] Func<Enrollment, bool> predicate)
         {
             var result = service.Find(predicate);
-            if (result == null)
-            {
-                return NotFound(new { message = "Enrollment not found! " });
-            }
             return Ok(result);
         }
 
