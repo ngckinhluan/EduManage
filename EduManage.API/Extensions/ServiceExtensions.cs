@@ -19,6 +19,7 @@ namespace EduManage.API.Extensions
             serviceCollection.AddScoped<EnrollmentDao>();
             serviceCollection.AddScoped<LecturerDao>();
             serviceCollection.AddScoped<LecturerCourseDao>();
+            serviceCollection.AddScoped<RoleDao>();
             #endregion
 
             #region Repositories
@@ -27,6 +28,7 @@ namespace EduManage.API.Extensions
             serviceCollection.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
             serviceCollection.AddScoped<ILecturerRepository, LecturerRepository>();
             serviceCollection.AddScoped<ILecturerCourseRepository, LecturerCourseRepository>();
+            serviceCollection.AddScoped<IRoleRepository, RoleRepository>();
             #endregion
 
             #region Services
@@ -37,6 +39,7 @@ namespace EduManage.API.Extensions
             serviceCollection.AddScoped<ILecturerCourseService, LecturerCourseService>();
             serviceCollection.AddScoped<IAuthService, AuthService>();
             serviceCollection.AddScoped<GenerateJWT>();
+            serviceCollection.AddScoped<IRoleService, RoleService>();
             #endregion
 
             return serviceCollection;

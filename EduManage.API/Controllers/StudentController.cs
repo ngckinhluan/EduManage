@@ -3,6 +3,7 @@ using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.DTOs.Response;
 using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,8 @@ namespace EduManage.API.Controllers
     public class StudentController(IStudentService service, IMapper mapper) : ControllerBase
     {
         [HttpGet]
+        [Authorize (Roles = "4")]
+
         public IActionResult GetStudents()
         {
             var result = service.GetAll();
@@ -21,6 +24,8 @@ namespace EduManage.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize (Roles = "4")]
+
         public IActionResult GetStudent(int id)
         {
             var result = service.GetById(id);
@@ -29,6 +34,8 @@ namespace EduManage.API.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles = "4")]
+
         public IActionResult AddStudent([FromBody] StudentRequestDto student)
         {
             service.Add(student);
@@ -70,6 +77,8 @@ namespace EduManage.API.Controllers
         //}
 
         [HttpPut("{id}")]
+        [Authorize (Roles = "4")]
+
         public IActionResult UpdateStudent(int id, [FromBody] StudentRequestDto student)
         { 
             service.Update(id, student);
@@ -77,6 +86,8 @@ namespace EduManage.API.Controllers
         }
         
         [HttpDelete("{id}")]
+        [Authorize (Roles = "4")]
+
         public IActionResult DeleteStudent(int id)
         {
             var student = service.GetById(id);

@@ -18,7 +18,7 @@ public class AuthService(GenerateJWT generateJwt, ApplicationDbContext context) 
         {
             throw new Exception("Invalid credentials");
         }
-        var token = generateJwt.GenerateToken(user.Email, user.LecturerId , user.UserName);
+        var token = generateJwt.GenerateToken(user.Email, user.LecturerId , user.UserName, user.RoleId);
         return new LoginResponseDto
         {
             Token = token,

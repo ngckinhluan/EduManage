@@ -8,13 +8,14 @@ namespace EduManage.Services.Helpers
 {
     public class GenerateJWT(JwtSettings jwtSettings)
     {
-        public string GenerateToken(string email, int lecturerId, string username)
+        public string GenerateToken(string email, int lecturerId, string username, int roleId)
         {
             var claims = new[]
             {
                 new Claim("Id", lecturerId.ToString()),
                 new Claim("Email", email),
-                // new Claim(ClaimTypes.Role, role),
+                new Claim("RoleId", roleId.ToString()),
+                new Claim(ClaimTypes.Role, roleId.ToString()),
                 new Claim("Username", username)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EduManage.API.Controllers
 {
@@ -10,6 +11,8 @@ namespace EduManage.API.Controllers
     public class LecturerCourseController(ILecturerCourseService lecturerCourseService) : ControllerBase
     {
         [HttpGet]
+        [Authorize (Roles = "4")]
+
         public IActionResult GetLecturerCourses()
         {
             var result = lecturerCourseService.GetAllLecturerCourses();
@@ -17,6 +20,8 @@ namespace EduManage.API.Controllers
         }
 
         [HttpGet("{lecturerId}/{courseId}")]
+        [Authorize (Roles = "4")]
+
         public IActionResult GetLecturerCourse(int lecturerId, int courseId)
         {
             var result = lecturerCourseService.GetLecturerCourseById(lecturerId, courseId);
@@ -24,6 +29,8 @@ namespace EduManage.API.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles = "4")]
+
         public IActionResult AddLecturerCourse([FromBody] LecturerCourseRequestDto lecturerCourse)
         {
             lecturerCourseService.AddLecturerCourse(lecturerCourse);
@@ -38,6 +45,8 @@ namespace EduManage.API.Controllers
         // }
 
         [HttpPut("{lecturerId}/{courseId}")]
+        [Authorize (Roles = "4")]
+
         public IActionResult UpdateLecturerCourse(int lecturerId, int courseId,
             [FromBody] LecturerCourseRequestDto lecturerCourse)
         {
@@ -46,6 +55,8 @@ namespace EduManage.API.Controllers
         }
 
         [HttpDelete("{lecturerId}/{courseId}")]
+        [Authorize (Roles = "4")]
+
         public IActionResult DeleteLecturerCourse(int lecturerId, int courseId)
         {
             lecturerCourseService.DeleteLecturerCourse(lecturerId, courseId);

@@ -44,6 +44,8 @@ namespace EduManage.BusinessObjects.Context
         public virtual DbSet<Lecturer> Lecturers { get; set; }
 
         public virtual DbSet<LecturerCourse> LecturerCourses { get; set; }
+        
+        public virtual DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,6 +58,13 @@ namespace EduManage.BusinessObjects.Context
             modelBuilder.Entity<Lecturer>().HasKey(l => l.LecturerId);
             modelBuilder.Entity<Lecturer>().Property(l => l.LecturerId).ValueGeneratedOnAdd();
             modelBuilder.Entity<LecturerCourse>().HasKey(lc => new { lc.LecturerId, lc.CourseId });
+            modelBuilder.Entity<Role>().HasKey(r => r.RoleId);
+            modelBuilder.Entity<Role>().Property(r => r.RoleId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Role>()
+                .Property(r => r.RoleName)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (RoleName)Enum.Parse(typeof(RoleName), v));
 
 
             // Relationships
@@ -78,6 +87,11 @@ namespace EduManage.BusinessObjects.Context
                 .HasOne(lc => lc.Course)
                 .WithMany(c => c.LecturerCourses)
                 .HasForeignKey(lc => lc.CourseId);
+            
+            modelBuilder.Entity<Lecturer>()
+                .HasOne(l => l.Role) 
+                .WithMany(r => r.Lectures) 
+                .HasForeignKey(l => l.RoleId);
         }
     }
 }

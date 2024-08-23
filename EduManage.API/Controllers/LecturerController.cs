@@ -9,6 +9,7 @@ using EduManage.BusinessObjects.Context;
 using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EduManage.API.Controllers
 {
@@ -17,6 +18,7 @@ namespace EduManage.API.Controllers
     public class LecturerController(ILecturerService service) : ControllerBase
     {
         [HttpGet]
+        [Authorize (Roles = "4")]
         public IActionResult GetLecturers()
         {
             var result = service.GetAll();
@@ -24,6 +26,7 @@ namespace EduManage.API.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize (Roles = "4")]
         public IActionResult GetLecturer(int id)
         {
             var result = service.GetById(id);
@@ -31,6 +34,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles = "4")]
         public IActionResult AddLecturer([FromBody] LecturerRequestDto lecturer)
         {
             service.Add(lecturer);
@@ -45,6 +49,7 @@ namespace EduManage.API.Controllers
         // }
 
         [HttpPut("{id}")]
+        [Authorize (Roles = "4")]
         public IActionResult UpdateLecturer(int id, [FromBody] LecturerRequestDto lecturer)
         {
             var existingLecturer = service.GetById(id);
@@ -53,6 +58,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize (Roles = "4")]
         public IActionResult DeleteLecturer(int id)
         {
             var lecturer = service.GetById(id);

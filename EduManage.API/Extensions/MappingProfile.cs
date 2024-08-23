@@ -15,6 +15,7 @@ namespace EduManage.API.Extensions
             CreateMap<Enrollment, EnrollmentRequestDto>().ReverseMap();
             CreateMap<Lecturer, LecturerRequestDto>().ReverseMap();
             CreateMap<LecturerCourse, LecturerCourseRequestDto>().ReverseMap();
+            CreateMap<Role, RoleRequestDto>().ReverseMap();
 
             // ResponseDto Mapping
             CreateMap<Course, CourseResponseDto>().ReverseMap();
@@ -22,6 +23,7 @@ namespace EduManage.API.Extensions
             CreateMap<Enrollment, EnrollmentResponseDto>().ReverseMap();
             CreateMap<Lecturer, LecturerResponseDto>().ReverseMap();
             CreateMap<LecturerCourse, LecturerCourseResponseDto>().ReverseMap();
+            CreateMap<Role, RoleResponseDto>().ReverseMap();
         }
     }
 }

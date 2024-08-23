@@ -2,6 +2,7 @@
 using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace EduManage.API.Controllers
     public class EnrollmentController(IEnrollmentService service, IMapper mapper) : ControllerBase
     {
         [HttpGet]
+        [Authorize (Roles = "4")]
         public IActionResult GetEnrollments()
         {
             var result = service.GetAllEnrollments();
@@ -19,6 +21,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpGet("{studentId}/{courseId}")]
+        [Authorize (Roles = "4")]
         public IActionResult GetEnrollment(int studentId, int courseId)
         {
             var result = service.GetEnrollmentById(studentId, courseId);
@@ -26,6 +29,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles = "4")]
         public IActionResult AddEnrollment(EnrollmentRequestDto enrollment)
         {
             service.AddEnrollment(enrollment);
@@ -47,6 +51,7 @@ namespace EduManage.API.Controllers
         //}
 
         [HttpPut("{studentId}/{courseId}")]
+        [Authorize (Roles = "4")]
         public IActionResult UpdateEnrollment(int studentId, int courseId, EnrollmentRequestDto enrollment)
         {
             service.UpdateEnrollment(studentId, courseId, enrollment);
@@ -54,6 +59,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpDelete("{studentId}/{courseId}")]
+        [Authorize (Roles = "4")]
         public IActionResult DeleteEnrollment(int studentId, int courseId)
         {
             service.DeleteEnrollment(studentId, courseId);

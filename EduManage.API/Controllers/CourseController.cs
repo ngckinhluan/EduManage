@@ -3,6 +3,7 @@ using EduManage.BusinessObjects.DTOs.Request;
 using EduManage.BusinessObjects.DTOs.Response;
 using EduManage.BusinessObjects.Entities;
 using EduManage.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace EduManage.API.Controllers
     public class CourseController(ICourseService service, IMapper mapper) : ControllerBase
     {
         [HttpGet]
+        [Authorize (Roles = "4")]
         public IActionResult GetCourses()
         {
             var result = service.GetAllCourses();
@@ -21,6 +23,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpGet("{id}", Name = "CourseById")]
+        [Authorize (Roles = "4")]
         public IActionResult GetCourse(int id)
         {
             var result = service.GetCourseById(id);
@@ -29,6 +32,7 @@ namespace EduManage.API.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles = "4")]
         public IActionResult AddCourse([FromBody] CourseRequestDto course)
         {
             service.AddCourse(course);
@@ -43,6 +47,7 @@ namespace EduManage.API.Controllers
         // }
 
         [HttpPut("{id}")]
+        [Authorize (Roles = "4")]
         public IActionResult UpdateCourse(int id, [FromBody] CourseRequestDto course)
         {
             var existingCourse = service.GetCourseById(id);
@@ -52,6 +57,7 @@ namespace EduManage.API.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize (Roles = "4")]
         public IActionResult DeleteCourse(int id)
         {
             var course = service.GetCourseById(id);
