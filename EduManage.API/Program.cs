@@ -34,7 +34,7 @@ namespace EduManage.API
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(builder.Configuration.GetConnectionString("eStore"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("edumanage"));
             });
             
             // Configure JwtSettings

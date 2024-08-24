@@ -37,35 +37,35 @@ public class RoleController(IRoleService service, IMapper mapper) : ControllerBa
     //     service.Add(roleDto);
     //     return Ok(new { message = "Role added successfully!" });
     // }
-    [HttpPost]
-    [Authorize (Roles = "4")]
+    //[HttpPost]
+    //[Authorize (Roles = "4")]
 
-    public IActionResult AddRole([FromBody] RoleRequestDto roleDto)
-    {
-        if (!Enum.IsDefined(typeof(RoleName), roleDto.RoleName))
-        {
-            return BadRequest(new { message = "Invalid role specified!" });
-        }
-        service.Add(roleDto); 
-        return Ok(new { message = "Role added successfully!" });
-    }
+    //public IActionResult AddRole([FromBody] RoleRequestDto roleDto)
+    //{
+    //    if (!Enum.IsDefined(typeof(RoleName), roleDto.RoleName))
+    //    {
+    //        return BadRequest(new { message = "Invalid role specified!" });
+    //    }
+    //    service.Add(roleDto); 
+    //    return Ok(new { message = "Role added successfully!" });
+    //}
 
     
-    [HttpPut("{id}")]
-    [Authorize (Roles = "4")]
+    //[HttpPut("{id}")]
+    //[Authorize (Roles = "4")]
 
-    public IActionResult UpdateRole(int id, [FromBody] RoleRequestDto role)
-    {
-        service.Update(id, role);
-        return Ok(new { message = "Role updated successfully!" });
-    }
+    //public IActionResult UpdateRole(int id, [FromBody] RoleRequestDto role)
+    //{
+    //    service.Update(id, role);
+    //    return Ok(new { message = "Role updated successfully!" });
+    //}
     
-    [HttpDelete("{id}")]
-    [Authorize (Roles = "4")]
-    public IActionResult DeleteRole(int id)
-    {
-        service.Delete(id);
-        return NoContent();
-    }
+    //[HttpDelete("{id}")]
+    //[Authorize (Roles = "4")]
+    //public IActionResult DeleteRole(int id)
+    //{
+    //    service.Delete(id);
+    //    return NoContent();
+    //}
     
 }
