@@ -25,15 +25,16 @@ namespace EduManage.BusinessObjects.Context
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
-            return configuration.GetConnectionString("EduManage");
+            return configuration.GetConnectionString("eStore");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(
-                    "Host=localhost;Port=5432;Database=edumanage;Username=postgres;Password=12345");
+                // optionsBuilder.UseNpgsql(
+                //     "Host=localhost;Port=5432;Database=edumanage;Username=postgres;Password=12345");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=edumanage;User Id=sa;Password=12345;TrustServerCertificate=True");
             }
         }
 

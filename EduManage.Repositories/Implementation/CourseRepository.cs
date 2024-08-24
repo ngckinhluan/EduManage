@@ -11,7 +11,6 @@ namespace EduManage.Repositories.Implementation
 {
     public class CourseRepository(CourseDao courseDao) : ICourseRepository
     {
-        
         public List<Course> GetAll() => courseDao.GetCourses();
         public Course GetById(int id) => courseDao.GetCourseById(id);
         public void Add(Course entity) =>  courseDao.AddCourse(entity);

@@ -19,6 +19,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\EduManage.BusinessObjects\EduManage.BusinessObjects.csproj" />
 	  <ProjectReference Include="..\EduManage.DAOs\EduManage.DAOs.csproj" />
+	  <ProjectReference Include="..\EduManage.Repositories\EduManage.Repositories.csproj" />
 	</ItemGroup>
 
 </Project>
