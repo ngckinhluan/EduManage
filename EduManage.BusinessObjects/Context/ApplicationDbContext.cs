@@ -34,7 +34,7 @@ namespace EduManage.BusinessObjects.Context
             {
                 // optionsBuilder.UseNpgsql(
                 //     "Host=localhost;Port=5432;Database=edumanage;Username=postgres;Password=12345");
-                optionsBuilder.UseSqlServer("Server=tcp:edumanageapidbserver.database.windows.net,1433;Initial Catalog=edumanage;Persist Security Info=False;User ID=edumanageadmin;Password=Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer(GetConnectionString());
             }
         }
 
