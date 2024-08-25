@@ -50,6 +50,8 @@ Welcome to the EduManage repository! This project is an API-based application bu
 
 ![bearer](./Screenshots/bearer.png)
 
+![unit-test](./Screenshots/unit-test.png)
+
 ## Deployment
 - The application has been deployed to **Microsoft Azure**. However, please note that the **Azure subscription has expired**, and the link to the deployed application is currently inaccessible.
 
