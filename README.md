@@ -13,7 +13,7 @@ Welcome to the EduManage repository! This project is an API-based application bu
 - The project also incorporates **Dependency Injection** for better modularity and testability.
 
 
-### Technology Stack
+## Technology Stack
 
 - **ASP.NET Core**: The framework used to build the API, known for its performance and cross-platform capabilities.
 - **SQL Server**: The relational database management system used for data storage and management.
@@ -29,7 +29,7 @@ Welcome to the EduManage repository! This project is an API-based application bu
 
 - **Fluent Validation**: Implemented Fluent Validation to enforce strong validation rules for your data models, ensuring data integrity and providing meaningful error messages.
 
-### Built With
+## Built With
 ![dotnet]
 
 ![csharp]
